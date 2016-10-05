@@ -28,4 +28,4 @@
    (reload)
    (cljs-repl)
    (cljs)
-   (taget :dir #{"target"})))
+   (target :dir #{"target"})))
