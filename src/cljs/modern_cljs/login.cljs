@@ -1,13 +1,12 @@
-(ns modern-cljs.login)
+(ns modern-cljs.login
+  (:require [domina.core :refer [by-id value set-value!]]))
 
 (defn validate-form []
-  (let [email (.getElementById js/document "email")
-        password (.getElementById js/document "password")]
-    (if (and (> (count (.-value email)) 0)
-             (> (count (.-value password)) 0))
-      true
-      (do (js/alert "You ain't filled in the form, filthy Ork!")
-          false))))
+  (if (and (> (count (value (by-id "email"))) 0)
+           (> (count (value (by-id "password"))) 0))
+    true
+    (do (js/alert "You ain't filled in the form, filthy Ork!")
+        false)))
 
 (defn init []
   (if (and js/document
