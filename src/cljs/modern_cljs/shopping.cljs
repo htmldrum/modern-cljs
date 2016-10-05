@@ -18,7 +18,7 @@
                                      (.toFixed 2)))
     false))
 
-(defn init []
+(defn ^:export init []
   (if (and js/document
            (.-getElementById js/document))
     (let [the-form (by-id "shoppingForm")]

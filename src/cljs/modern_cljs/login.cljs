@@ -8,7 +8,7 @@
     (do (js/alert "You ain't filled in the form, filthy Ork!")
         false)))
 
-(defn init []
+(defn ^:export init []
   (if (and js/document
            (.-getElementById js/document))
     (let [login-form (.getElementById js/document "loginForm")]
