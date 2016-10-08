@@ -1,5 +1,5 @@
 (set-env!
- :source-paths #{"src/cljs"}
+ :source-paths #{"src/clj" "src/cljs"}
  :resource-paths #{"html"}
 
  :dependencies '[[org.clojure/clojure "1.7.0"]
@@ -12,7 +12,11 @@
                  [weasel "0.7.0"]
                  [org.clojure/tools.nrepl "0.2.12"]
                  [org.clojars.magomimmo/domina "2.0.0-SNAPSHOT"]
-                 ])
+                 [hiccups "0.3.0"]
+                 [compojure "1.4.0"]
+                 [org.clojars.magomimmo/shoreleave-remote-ring "0.3.1"]
+                 [org.clojars.magomimmo/shoreleave-remote "0.3.1"]
+                 [javax.servlet/servlet-api "2.5"]])
 
 (require '[adzerk.boot-cljs :refer [cljs]]
          '[pandeiro.boot-http :refer [serve]]
@@ -24,7 +28,9 @@
   "Launch Immediate Feedback Development Environment"
   []
   (comp
-   (serve :dir "target")
+   (serve :handler 'modern-cljs.remotes/app ;; ring handler
+          :resource-root "target" ;; resource-path
+          :reload true) ;; reload server side ns
    (watch)
    (reload)
    (cljs-repl)
